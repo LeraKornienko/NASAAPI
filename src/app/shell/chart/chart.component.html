@@ -1,0 +1,69 @@
+<div class="main-container">
+  <div class="first-container">
+  <div class="search-bar">
+    <form class="search-bar">
+    <h3 class="text"> Fill in Camera name </h3>
+      <mat-form-field
+        class="input-wrapper"
+        floatLabel="never"
+        appearance="none"
+        fxLayout="row"
+        fxLayoutAlign="space-between center">
+       <input
+         matInput type="text"
+         class="search-input"
+         placeholder="Fill in Camera name"
+         disableOptionCentering
+         autocomplete="off"
+         appTrimValue
+        [formControl]="cameraFormControl"/>
+       </mat-form-field>
+    <h3 class="text"> Fill in Sol </h3>
+      <mat-form-field
+        class="input-wrapper"
+        floatLabel="never"
+        appearance="none"
+        fxLayout="row"
+        fxLayoutAlign="space-between center">
+      <input matInput type="text"
+        class="search-input"
+        placeholder="Fill in Sol"
+        disableOptionCentering
+        autocomplete="off"
+        appTrimValue
+        [formControl]="solFormControl"/>
+       </mat-form-field>
+    <button mat-button class="button" (keyup.enter)="onSearch()" (click)="onSearch()">
+      search
+    </button>
+    </form>
+  </div>
+  </div>
+  <div class="second-container">
+    <div fxLayoutAlign="center"><h2 class="text">Mars Rover Photos</h2></div>
+    <div class="card-wrapper"  >
+    <mat-card class="card" fxLayout="row" *ngFor="let item of responceObject.photos" >
+    <div>
+      <img [src]="item.img_src" class="card-img">
+      <div>
+        <h2 class="card-header">Photo Id: {{item.id}}</h2>
+      </div>
+      <div>
+        <p class="card-footer">Sol: {{item.sol}}</p>
+        <p class="card-footer">Rover name: {{item.rover.name}}</p>
+        <p class="card-footer">Camera name: {{item.camera.name}}</p>
+      </div>
+    </div>
+  </mat-card>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center">
+  <button mat-button class="button" [disabled]="responceObject.photos.page==1" (click)="currentPageLess()" [formControl]="lessFormControl">
+     <-- previous page
+    </button>
+     <button mat-button class="button" (click)="currentPageMore()" [formControl]="pageFormControl">
+    next page -->
+    </button>
+    </div>
+    </div>
+</div>
+
